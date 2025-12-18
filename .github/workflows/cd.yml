@@ -1,0 +1,16 @@
+Create .github/workflows/cd.yml
+name: CD Pipeline
+
+on:
+  workflow_run:
+    workflows: ["CI Pipeline"]
+    types:
+      - completed
+
+jobs:
+  deploy:
+    runs-on: ubuntu-latest
+
+    steps:
+    - name: Deployment Simulation
+      run: echo "Application Deployed Successfully"
