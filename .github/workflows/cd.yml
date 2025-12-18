@@ -22,8 +22,8 @@ jobs:
     - name: Install dependencies
       run: |
         python -m pip install --upgrade pip
-        pip install pytest  # Install pytest properly
+        pip install pytest
 
     - name: Run Tests
       run: |
-        python -m pytest
+        python -m pytest  # pytest will now find test_labmain.py
