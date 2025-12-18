@@ -1,16 +1,29 @@
-Create .github/workflows/cd.yml
-name: CD Pipeline
+name: Python CI
 
 on:
-  workflow_run:
-    workflows: ["CI Pipeline"]
-    types:
-      - completed
+  push:
+    branches: [ main ]
+  pull_request:
+    branches: [ main ]
 
 jobs:
-  deploy:
+  build:
     runs-on: ubuntu-latest
 
     steps:
-    - name: Deployment Simulation
-      run: echo "Application Deployed Successfully"
+    - name: Checkout Code
+      uses: actions/checkout@v3
+
+    - name: Set up Python
+      uses: actions/setup-python@v4
+      with:
+        python-version: '3.10'
+
+    - name: Install dependencies
+      run: |
+        python -m pip install --upgrade pip
+        pip install pytest  # Install pytest properly
+
+    - name: Run Tests
+      run: |
+        python -m pytest
